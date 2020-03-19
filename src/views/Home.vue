@@ -5,9 +5,11 @@
         <h5>Select the category the item you're looking for belongs to</h5>
         <div class="wrapper">
             <div class="categories">
-                <div class="category" v-for="(category, index) in categories" :key="index">
-                    <p>{{category}}</p>
-                </div>
+                <router-link v-for="(category, index) in categories" :key="index" :to="{ name: 'category', params: {name: category.toLowerCase()}}" @click.native="selectCategory(category, index)">
+                    <div class="category">
+                        <p>{{category}}</p>
+                    </div>
+                </router-link>
 
             </div>
         </div>
@@ -38,7 +40,13 @@
           categories() {
             return this.$root.$data.categories;
           }
-      }
+      },
+        methods: {
+            selectCategory(category, index) {
+                this.$root.$data.selectedCategory = category;
+                this.$root.$data.selectedCategoryIndex = index;
+            }
+        }
     }
 </script>
 
