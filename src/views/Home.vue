@@ -1,36 +1,69 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="/images/rslogo3.png">
-    <HelloWorld msg="Welcome to the Grand Exchange!"/>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="footer" style="
-  position: fixed;
-  padding-top: 10px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #c2b7a9;
-  color: white;
-  text-align: center;">
-      <p><a style="color: black; font-weight: lighter"
-            href="https://github.com/JaredEzz/creative_project_3">Github
-        Repository</a></p>
+    <div class="home">
+        <HelloWorld msg="Welcome to the Grand Exchange!"/>
+        <br>
+        <h5>Select the category the item you're looking for belongs to</h5>
+        <div class="wrapper">
+            <div class="categories">
+                <div class="category" v-for="(category, index) in categories" :key="index">
+                    <p>{{category}}</p>
+                </div>
+
+            </div>
+        </div>
+      <div class="items">
+          <div class="item" v-for="item in items" :key="item.id">
+            <p>{{item.name}}</p>
+          </div>
+
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    // @ is an alias to /src
+    import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'Home',
+        components: {
+            HelloWorld
+        },
+        data() {
+            return {
+              searchText: '',
+            }
+        },
+      computed:{
+          categories() {
+            return this.$root.$data.categories;
+          }
+      }
+    }
 </script>
+
+<style scoped>
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .category {
+        margin-top: 20px;
+        padding-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        color: white;
+        vertical-align: middle !important;
+        horiz-align: center;
+        background: url("https://www.runescape.com/img/rsp777/grand_exchange/overview-button.gif");
+        height: 115px !important;
+    }
+
+    .category {
+        width: 200px;
+    }
+
+</style>
